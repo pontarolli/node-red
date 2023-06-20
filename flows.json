@@ -1,0 +1,74 @@
+[
+    {
+        "id": "4ce9452145435303",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "07f874adfd4512d2",
+        "type": "inject",
+        "z": "4ce9452145435303",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 200,
+        "wires": [
+            [
+                "a6d1423417e8d584"
+            ]
+        ]
+    },
+    {
+        "id": "7158b1c5c565b6fc",
+        "type": "debug",
+        "z": "4ce9452145435303",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a6d1423417e8d584",
+        "type": "function",
+        "z": "4ce9452145435303",
+        "name": "function 1",
+        "func": "// Create a Date object from the payload\nvar date = new Date(msg.payload);\n// Change the payload to be a formatted Date string\nmsg.payload = date.toString();\n// Return the message so it can be sent on\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 200,
+        "wires": [
+            [
+                "7158b1c5c565b6fc"
+            ]
+        ]
+    }
+]

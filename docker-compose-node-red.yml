@@ -1,0 +1,27 @@
+################################################################################
+# Node-RED Stack or Compose
+################################################################################
+# docker stack deploy node-red --compose-file docker-compose-node-red.yml
+# docker-compose -f docker-compose-node-red.yml -p my-nodered-project up
+# The above compose file:
+# creates a node-red service
+# pulls the latest node-red image
+# sets the timezone to Europe/Amsterdam
+# Maps the container port 1880 to the host port 1880
+# creates a node-red-net network and attaches the container to this network
+# persists the /data dir inside the container to the node-red-data volume in Docker
+################################################################################
+version: "3.7"
+
+services:
+  node-red:
+    image: nodered/node-red:latest
+    environment:
+      - TZ=America/Sao_Paulo
+    ports:
+      - "1880:1880"
+    volumes:
+      - node-red-data:/data
+
+volumes:
+  node-red-data:

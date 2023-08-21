@@ -6,7 +6,7 @@
 # The above compose file:
 # creates a node-red service
 # pulls the latest node-red image
-# sets the timezone to Europe/Amsterdam
+# sets the timezone to America/São Paulo
 # Maps the container port 1880 to the host port 1880
 # creates a node-red-net network and attaches the container to this network
 # persists the /data dir inside the container to the node-red-data volume in Docker
@@ -16,6 +16,7 @@ version: "3.7"
 services:
   node-red:
     image: nodered/node-red:latest
+    restart: always
     environment:
       - TZ=America/Sao_Paulo
     ports:

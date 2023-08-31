@@ -1,5 +1,8 @@
 # Node-RED
 
+# Run
+`docker-compose up -d`
+
 ## Getting Started
 - [Installing Node-RED](https://nodered.org/docs/getting-started)
 - [Creating your first flow](https://nodered.org/docs/tutorials/first-flow)

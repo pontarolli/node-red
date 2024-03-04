@@ -3,6 +3,9 @@
 # Run
 `docker-compose up -d`
 
+# Flows
+Copy the flows and paste it into `\\wsl.localhost\docker-desktop-data\data\docker\volumes\my-nodered-project_node-red-data\_data\lib\flows`
+
 ## Getting Started
 - [Installing Node-RED](https://nodered.org/docs/getting-started)
 - [Creating your first flow](https://nodered.org/docs/tutorials/first-flow)

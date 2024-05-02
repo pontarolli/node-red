@@ -1,0 +1,1268 @@
+[
+    {
+        "id": "005718256dc4991d",
+        "type": "moleculer-request-action",
+        "z": "d94cf74572a486cc",
+        "broker": "15fdc347.1238cd",
+        "service": "39ab2b37.fd8374",
+        "name": "Math Add",
+        "topic": "add",
+        "x": 300,
+        "y": 1380,
+        "wires": [
+            [
+                "3a68546f8bd4209b"
+            ]
+        ]
+    },
+    {
+        "id": "a64bc77ce0b254ac",
+        "type": "moleculer-response-action",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "x": 780,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "3a68546f8bd4209b",
+        "type": "function",
+        "z": "d94cf74572a486cc",
+        "name": "Function ADD",
+        "func": "let response = Number(msg.payload.a) + Number(msg.payload.b);\nmsg.payload = response;\nnode.send([null,null,msg]);\nmsg.emit('test.emit',\"OK\");\nmsg.broadcast('test.bcast',\"OK\")\n\nmsg.call('math.sub',{a:9,b:2},{meta:{y:33}}).then((data)=>{\n    msg.payload = data\n    node.send([null,msg])\n}).catch((err)=>{\n    node.error(err, msg)\n})\n\n\nmsg.call('$none.actions').then((data)=>{\n    msg.payload = data\n    node.send([null,msg])\n}).catch((err)=>{\n    node.error(err, msg)\n})\n\nreturn [msg]; // or node.send([msg])",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 540,
+        "y": 1380,
+        "wires": [
+            [
+                "a64bc77ce0b254ac",
+                "41300d9adf1a8290"
+            ],
+            [
+                "d2606ba1e7eecfa9"
+            ]
+        ]
+    },
+    {
+        "id": "d648c6dbc2edeb8f",
+        "type": "moleculer-call",
+        "z": "d94cf74572a486cc",
+        "broker": "15fdc347.1238cd",
+        "name": "",
+        "topic": "math.add",
+        "options": "{}",
+        "x": 520,
+        "y": 1620,
+        "wires": [
+            [
+                "7592b42d4fcbfdda"
+            ]
+        ]
+    },
+    {
+        "id": "5f700bac91ed13b6",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "options",
+                "v": "{\"meta\":{\"z\":1}}",
+                "vt": "json"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"a\":2,\"b\":3}",
+        "payloadType": "json",
+        "x": 310,
+        "y": 1620,
+        "wires": [
+            [
+                "d648c6dbc2edeb8f"
+            ]
+        ]
+    },
+    {
+        "id": "7592b42d4fcbfdda",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 790,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "52573541212e4c49",
+        "type": "moleculer-event",
+        "z": "d94cf74572a486cc",
+        "broker": "15fdc347.1238cd",
+        "service": "39ab2b37.fd8374",
+        "name": "",
+        "topic": "test.emit",
+        "group": "",
+        "x": 300,
+        "y": 1500,
+        "wires": [
+            [
+                "9f82eb3c98e99cd7"
+            ]
+        ]
+    },
+    {
+        "id": "0e3a57cde5f5e8e5",
+        "type": "moleculer-event",
+        "z": "d94cf74572a486cc",
+        "broker": "15fdc347.1238cd",
+        "service": "39ab2b37.fd8374",
+        "name": "",
+        "topic": "test.bcast",
+        "group": "",
+        "x": 300,
+        "y": 1540,
+        "wires": [
+            [
+                "d89f7d719ae14cb5"
+            ]
+        ]
+    },
+    {
+        "id": "9f82eb3c98e99cd7",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 530,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "d89f7d719ae14cb5",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 530,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "41300d9adf1a8290",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 770,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "e557f6ea9e55a7e5",
+        "type": "catch",
+        "z": "d94cf74572a486cc",
+        "name": "Catch Call Error",
+        "scope": [
+            "3a68546f8bd4209b",
+            "af5a3a8656f8fffc"
+        ],
+        "uncaught": false,
+        "x": 540,
+        "y": 1340,
+        "wires": [
+            [
+                "91451f450b35afbd"
+            ]
+        ]
+    },
+    {
+        "id": "91451f450b35afbd",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 770,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "3f028bb75e5d425e",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Events",
+        "info": "",
+        "x": 290,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "2908e8b762884f76",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Actions",
+        "info": "",
+        "x": 290,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "047c2279f7b89956",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Calling Action",
+        "info": "",
+        "x": 310,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "6ad2a52ea7bb9af1",
+        "type": "moleculer-request-action",
+        "z": "d94cf74572a486cc",
+        "broker": "15fdc347.1238cd",
+        "service": "39ab2b37.fd8374",
+        "name": "Math Sub",
+        "topic": "sub",
+        "x": 300,
+        "y": 1420,
+        "wires": [
+            [
+                "af5a3a8656f8fffc"
+            ]
+        ]
+    },
+    {
+        "id": "af5a3a8656f8fffc",
+        "type": "function",
+        "z": "d94cf74572a486cc",
+        "name": "Function SUB",
+        "func": "let response = Number(msg.payload.a) - Number(msg.payload.b);\nmsg.payload = response;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 540,
+        "y": 1440,
+        "wires": [
+            [
+                "6eaa03200891fb04",
+                "0fc03180eaed2619"
+            ]
+        ]
+    },
+    {
+        "id": "6eaa03200891fb04",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 770,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "0fc03180eaed2619",
+        "type": "moleculer-response-action",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "x": 780,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "bcd5442f0457c69d",
+        "type": "moleculer-call",
+        "z": "d94cf74572a486cc",
+        "broker": "15fdc347.1238cd",
+        "name": "",
+        "topic": "math.sub",
+        "options": "{}",
+        "x": 520,
+        "y": 1660,
+        "wires": [
+            [
+                "ccf8208d31fb4525"
+            ]
+        ]
+    },
+    {
+        "id": "0297b36c293cc4c6",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "Wrong Data",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"a\":\"wrong data\",\"b\":3}",
+        "payloadType": "json",
+        "x": 310,
+        "y": 1740,
+        "wires": [
+            [
+                "bcd5442f0457c69d"
+            ]
+        ]
+    },
+    {
+        "id": "ccf8208d31fb4525",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 790,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "7c891fa122f15e5f",
+        "type": "catch",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "scope": [
+            "bcd5442f0457c69d"
+        ],
+        "uncaught": false,
+        "x": 570,
+        "y": 1720,
+        "wires": [
+            [
+                "ea71c1922e640741"
+            ]
+        ]
+    },
+    {
+        "id": "a07174b65a8311cf",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"a\":6,\"b\":3}",
+        "payloadType": "json",
+        "x": 310,
+        "y": 1660,
+        "wires": [
+            [
+                "bcd5442f0457c69d"
+            ]
+        ]
+    },
+    {
+        "id": "ea71c1922e640741",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 770,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "b1527d422ce5f57d",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"a\":\"5\",\"b\":3}",
+        "payloadType": "json",
+        "x": 310,
+        "y": 1700,
+        "wires": [
+            [
+                "bcd5442f0457c69d"
+            ]
+        ]
+    },
+    {
+        "id": "247378efeafd81d3",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Calling Greeter's Actions",
+        "info": "",
+        "x": 350,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "d2606ba1e7eecfa9",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "Msg Call inside function",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 830,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "485e66ec102eae94",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "Call greeter service",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 330,
+        "y": 1920,
+        "wires": [
+            [
+                "fe80220a0c23a069"
+            ]
+        ]
+    },
+    {
+        "id": "1f74f74d505466c0",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "d1adb753d94ffc04",
+        "type": "moleculer-call",
+        "z": "d94cf74572a486cc",
+        "broker": "15fdc347.1238cd",
+        "name": "",
+        "topic": "greeter.welcome",
+        "options": "{}",
+        "x": 540,
+        "y": 1960,
+        "wires": [
+            [
+                "1f74f74d505466c0"
+            ]
+        ]
+    },
+    {
+        "id": "4eb18f231e7e0915",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"name\":\"unesp\"}",
+        "payloadType": "json",
+        "x": 320,
+        "y": 1960,
+        "wires": [
+            [
+                "d1adb753d94ffc04"
+            ]
+        ]
+    },
+    {
+        "id": "fe80220a0c23a069",
+        "type": "moleculer-call",
+        "z": "d94cf74572a486cc",
+        "broker": "15fdc347.1238cd",
+        "name": "",
+        "topic": "greeter.hello",
+        "options": "{}",
+        "x": 530,
+        "y": 1920,
+        "wires": [
+            [
+                "37c368135b77d525"
+            ]
+        ]
+    },
+    {
+        "id": "37c368135b77d525",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "38d58c472964c163",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "API Gateway",
+        "info": "",
+        "x": 310,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "b12e255c39de7ca1",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "http GET",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 2040,
+        "wires": [
+            [
+                "041d25da6622ce84"
+            ]
+        ]
+    },
+    {
+        "id": "041d25da6622ce84",
+        "type": "http request",
+        "z": "d94cf74572a486cc",
+        "name": "greeter/hello",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "http://192.168.200.106:3000/api/greeter/hello",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 530,
+        "y": 2040,
+        "wires": [
+            [
+                "9545dbb6b288b47f"
+            ]
+        ]
+    },
+    {
+        "id": "9545dbb6b288b47f",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "58ffae9d.a7005",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "17626462.e89d9c",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 80,
+        "wires": [
+            [
+                "2921667d.d6de9a"
+            ]
+        ]
+    },
+    {
+        "id": "2921667d.d6de9a",
+        "type": "function",
+        "z": "d94cf74572a486cc",
+        "name": "Format timestamp",
+        "func": "// Create a Date object from the payload\nvar date = new Date(msg.payload);\n// Change the payload to be a formatted Date string\nmsg.payload = date.toString();\n// Return the message so it can be sent on\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 80,
+        "wires": [
+            [
+                "58ffae9d.a7005"
+            ]
+        ]
+    },
+    {
+        "id": "5d763cb27a9335f0",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Creating your first flow",
+        "info": "This tutorial introduces the Node-RED editor and creates a flow that demonstrates the Inject, Debug and Function nodes.",
+        "x": 320,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "e36406f2.8ef798",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 290,
+        "y": 220,
+        "wires": [
+            [
+                "c3c50023.3bbed"
+            ]
+        ]
+    },
+    {
+        "id": "c3c50023.3bbed",
+        "type": "http request",
+        "z": "d94cf74572a486cc",
+        "name": "Recent Quakes",
+        "method": "GET",
+        "paytoqs": "ignore",
+        "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.csv",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "8afc6cac.e0812"
+            ]
+        ]
+    },
+    {
+        "id": "8afc6cac.e0812",
+        "type": "csv",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": 0,
+        "strings": true,
+        "include_empty_strings": false,
+        "include_null_values": false,
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "44779781.4190f8",
+                "6f0eb546.9e208c"
+            ]
+        ]
+    },
+    {
+        "id": "44779781.4190f8",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": false,
+        "complete": false,
+        "x": 790,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6f0eb546.9e208c",
+        "type": "switch",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "property": "payload.mag",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "7",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 280,
+        "wires": [
+            [
+                "d78d4aa8.8c8208"
+            ]
+        ]
+    },
+    {
+        "id": "d78d4aa8.8c8208",
+        "type": "change",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "PANIC!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 340,
+        "wires": [
+            [
+                "72fddece.fac0d"
+            ]
+        ]
+    },
+    {
+        "id": "72fddece.fac0d",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": false,
+        "complete": false,
+        "x": 910,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "79e0c4372eccf07a",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Creating your second flow",
+        "info": "https://nodered.org/docs/tutorials/second-flow",
+        "x": 330,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "81c979ec975a6746",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Moleculer Framework Example",
+        "info": "",
+        "x": 370,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "f86b8bfb692f08e9",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "PLC Siemens S7 1500 integration",
+        "info": "Integration with Node-RED and Framework Moleculer.",
+        "x": 360,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "51f7207a.baa53",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "*** Setup devices to ping here ***",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "20",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[{\"name\":\"plc\",\"host\":\"192.168.200.2\"}]",
+        "payloadType": "json",
+        "x": 380,
+        "y": 640,
+        "wires": [
+            [
+                "cf66e372.27656"
+            ]
+        ]
+    },
+    {
+        "id": "cf66e372.27656",
+        "type": "ping",
+        "z": "d94cf74572a486cc",
+        "mode": "triggered",
+        "name": "",
+        "host": "",
+        "timer": "20",
+        "inputs": 1,
+        "x": 590,
+        "y": 640,
+        "wires": [
+            [
+                "ddef4dbb.e8897"
+            ]
+        ]
+    },
+    {
+        "id": "cf6a929c.6311a",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 890,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "ddef4dbb.e8897",
+        "type": "function",
+        "z": "d94cf74572a486cc",
+        "name": "Store Results",
+        "func": "let pingResults = flow.get(\"pingResults\") || {}\nlet thisPing = pingResults[msg.topic] || {};\nlet success = msg.payload !== false && msg.payload >= 0;\n\nthisPing.name = msg.ping.name;\nthisPing.host = msg.ping.host;\nthisPing.timestamp = new Date();\nthisPing.responseTime = success ? msg.payload : null;\nthisPing.state = success ? \"ok\" : \"ng\" ;\n\npingResults[msg.topic] = thisPing;//store ping obj in pingResults\nflow.set(\"pingResults\",pingResults);//save pingResults in flow context\n\nmsg.payload = thisPing;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 640,
+        "wires": [
+            [
+                "cf6a929c.6311a"
+            ]
+        ]
+    },
+    {
+        "id": "af58896dc8bfef48",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Ping PLC",
+        "info": "Setup devices to ping here\n\n\n[{\"name\":\"router\",\"host\":\"192.168.1.1\"},{\"name\":\"tv\",\"host\":\"192.168.1.51\"},{\"name\":\"smart speaker\",\"host\":\"192.168.1.52\"},{\"name\":\"bad device\",\"host\":\"192.168.2.99\"}]",
+        "x": 280,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "36816cf93379ef0e",
+        "type": "s7 in",
+        "z": "d94cf74572a486cc",
+        "endpoint": "ccb886d1407a4b93",
+        "mode": "single",
+        "variable": "DB1,I0",
+        "diff": true,
+        "name": "",
+        "x": 270,
+        "y": 720,
+        "wires": [
+            [
+                "297926a9b9f413e5",
+                "f4c83086d63fc3f5"
+            ]
+        ]
+    },
+    {
+        "id": "297926a9b9f413e5",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "Value DB1, I0",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "f4c83086d63fc3f5",
+        "type": "s7 out",
+        "z": "d94cf74572a486cc",
+        "endpoint": "ccb886d1407a4b93",
+        "variable": "DB1,I4",
+        "name": "",
+        "x": 530,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "1",
+        "type": "inject",
+        "z": "d94cf74572a486cc",
+        "name": "Trigger Every Second",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 340,
+        "y": 440,
+        "wires": [
+            [
+                "2"
+            ]
+        ]
+    },
+    {
+        "id": "2",
+        "type": "function",
+        "z": "d94cf74572a486cc",
+        "name": "Increment and Reset",
+        "func": "let count = flow.get('count') || 0;\ncount = count >= 20 ? 0 : count + 1;\nflow.set('count', count);\nreturn {payload: count};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 440,
+        "wires": [
+            [
+                "3"
+            ]
+        ]
+    },
+    {
+        "id": "3",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "Display Count",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 780,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "9d20e30d958446a5",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Input/Read from S7",
+        "info": "Conecta-se ao PLC\n\nRecebe valores de 0 a 20",
+        "x": 310,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "9afcea8886653c52",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Output/Write to S7",
+        "info": "Conecta-se ao PLC\n\nEnvia os valores de 0 a 20",
+        "x": 310,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "a50c0e91c13f7fab",
+        "type": "s7 in",
+        "z": "d94cf74572a486cc",
+        "endpoint": "ccb886d1407a4b93",
+        "mode": "single",
+        "variable": "DB1,I4",
+        "diff": true,
+        "name": "",
+        "x": 270,
+        "y": 920,
+        "wires": [
+            [
+                "0412f655a22696cd"
+            ]
+        ]
+    },
+    {
+        "id": "0412f655a22696cd",
+        "type": "debug",
+        "z": "d94cf74572a486cc",
+        "name": "Check DB1, I4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "fb5828738af9bbea",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Input/Read",
+        "info": "",
+        "x": 280,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "8483637553024c51",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Couter 0 to 10",
+        "info": "",
+        "x": 290,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "2fb6fe5c519f4c8b",
+        "type": "comment",
+        "z": "d94cf74572a486cc",
+        "name": "Moleculer Framework AAS",
+        "info": "",
+        "x": 350,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "15fdc347.1238cd",
+        "type": "moleculer-config",
+        "name": "NATS",
+        "options": "{\"transporter\":\"nats://192.168.200.106:4222\"}"
+    },
+    {
+        "id": "39ab2b37.fd8374",
+        "type": "moleculer-service-config",
+        "name": "math",
+        "version": "",
+        "settings": "{}"
+    },
+    {
+        "id": "ccb886d1407a4b93",
+        "type": "s7 endpoint",
+        "transport": "iso-on-tcp",
+        "address": "192.168.200.2",
+        "port": "102",
+        "rack": "0",
+        "slot": "1",
+        "localtsaphi": "01",
+        "localtsaplo": "00",
+        "remotetsaphi": "01",
+        "remotetsaplo": "00",
+        "connmode": "rack-slot",
+        "adapter": "",
+        "busaddr": "2",
+        "cycletime": "1000",
+        "timeout": "2000",
+        "name": "",
+        "vartable": [
+            {
+                "addr": "DB1,I4",
+                "name": "DB1,I4"
+            },
+            {
+                "addr": "DB1,I0",
+                "name": "DB1,I0"
+            }
+        ]
+    }
+]

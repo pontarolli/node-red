@@ -8,7 +8,7 @@ To start Node-RED using Docker, navigate to the Node-RED directory and use Docke
 
 ```bash
 cd node-red
-docker compose up
+docker compose up 
 ```
 
 ## Managing Flows

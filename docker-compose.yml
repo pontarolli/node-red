@@ -1,13 +1,12 @@
 version: '3'
 services:
-  node_red:
-    image: nodered/node-red:latest  
-    container_name: node_red
+  node-red:
+    image: nodered/node-red:latest
+    container_name: node-red
     restart: "no"
-    user: "root"                    # Run the container as root
+    user: "root" # Run the container as root
     ports:
-      - "1880:1880"                 # Default Node-RED port
+      - "1880:1880" # Default Node-RED port
     volumes:
-      - ~/.node-red/data:/data      # Ensures data persistence across container restarts
+      - ~/.node-red/data:/data # Ensures data persistence across container restarts
     mem_limit: 20m
-                                    

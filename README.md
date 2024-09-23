@@ -44,7 +44,8 @@ If you wish to install additional Node.js libraries:
 If you encounter any permission issues, particularly when accessing files or directories, you can modify the permissions recursively using `chmod`. **Note:** Use this command with caution as it grants wide permissions.
 
 ```bash
-chmod -R 777 ~/.node-red
+sudo chmod -R 755 ~/.node-red/data    # Permissão apenas quem criou
+sudo chmod -R 777 ~/.node-red         # Permissão todos usuarios
 ```
 
 ## Conclusion

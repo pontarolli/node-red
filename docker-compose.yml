@@ -4,15 +4,11 @@ services:
     image: nodered/node-red:latest
     container_name: node-red
     restart: "always"
-    # user: "root" # Run the container as root
     ports:
-      - "1880:1880" # Default Node-RED port
+      - "1880:1880" # Porta padrão do Node-RED
     environment:
       - NODE_RED_ENABLE_PROJECTS=true
     volumes:
-      # - ~/.node-red/data:/data # Ensures data persistence across container restarts
-      - myNodeREDdata:/data
-    mem_limit: 20m
-
-volumes:
-  myNodeREDdata:
+      - ~/.node-red/data:/data # Volume montado para persistência de dados
+    mem_limit: 512m
+    user: "0:0" # UID e GID do usuário 'pi'

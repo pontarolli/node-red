@@ -3,10 +3,16 @@ services:
   node-red:
     image: nodered/node-red:latest
     container_name: node-red
-    restart: "no"
-    user: "root" # Run the container as root
+    restart: "always"
+    # user: "root" # Run the container as root
     ports:
       - "1880:1880" # Default Node-RED port
+    environment:
+      - NODE_RED_ENABLE_PROJECTS=true
     volumes:
-      - ~/.node-red/data:/data # Ensures data persistence across container restarts
+      # - ~/.node-red/data:/data # Ensures data persistence across container restarts
+      - myNodeREDdata:/data
     mem_limit: 20m
+
+volumes:
+  myNodeREDdata:
